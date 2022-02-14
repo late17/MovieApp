@@ -1,5 +1,6 @@
 package com.example.myapplication.data.remote
 
+import com.example.myapplication.data.model.Movie
 import com.example.myapplication.data.model.MovieDetails
 import com.example.myapplication.data.model.PageModel
 import io.reactivex.Single
@@ -12,5 +13,6 @@ interface MovieAPI {
     fun getMovieDetailsById(@Path("movie_id") id: Int): Single<MovieDetails>
 
     @GET("movie/popular")
-    fun getPopular(@Query("page") pageNum: Int):Single<PageModel>
+    fun getPopular(@Query("page") pageNum: Int):List<Movie>
+
 }

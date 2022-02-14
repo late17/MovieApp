@@ -5,4 +5,5 @@
     <string name="genres">Genres:</string>
     <string name="it_drama">IT drama</string>
     <string name="enter_num">Enter num</string>
+    <string name="load_error">Connection error</string>
 </resources>
