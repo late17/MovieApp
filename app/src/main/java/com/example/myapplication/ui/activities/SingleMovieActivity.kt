@@ -16,8 +16,8 @@ import com.example.myapplication.data.model.MovieDetails
 import com.example.myapplication.data.remote.POSTER_BASE_URL
 import com.example.myapplication.data.viewModel.MovieDetailsViewModel
 import com.example.myapplication.presenters.SingleMoviePresenter
-import com.example.myapplication.data.repositories.NetworkState.Companion.LOADED
 import com.example.myapplication.views.SingleMovieView
+import com.example.myapplication.data.repositories.NetworkState.Companion.LOADED
 import java.text.NumberFormat
 import java.util.*
 
