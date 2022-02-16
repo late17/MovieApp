@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Movie
-import com.example.myapplication.data.remote.MovieAPIClient
-import com.example.myapplication.data.repositories.PageRepository
-import com.example.myapplication.data.viewModel.PageViewModel
 
 class PageAdapter(context: Context) : PagingDataAdapter<Movie, PageAdapter.MovieViewHolder>(ArticleDiffItemCallback)  {
 

@@ -32,29 +32,7 @@ class MainActivity : AppCompatActivity(), MainActivityView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val pageRep = PageSource(MovieAPIClient().getClient())
-
-        //recyclerView = findViewById(R.id.recylerView)
-
-//        val layoutManager = LinearLayoutManager(this)
-//        recyclerView.layoutManager = layoutManager
-//        val movieAdapter = PageAdapter(this)
-//
-//        recyclerView.layoutManager = layoutManager
-//        recyclerView.setHasFixedSize(true)
-//        recyclerView.adapter = movieAdapter
-
-
         setupUsersList()
-
-
-//        val btn = findViewById<Button>(R.id.button)
-//        val text = findViewById<TextView>(R.id.num)
-//        btn.setOnClickListener(View.OnClickListener {
-//            val intent = Intent(this, SingleMovieActivity::class.java)
-//            intent.putExtra("movieId", Integer.parseInt(text.text.toString()))
-//            startActivity(intent)
-//        })
     }
 
     private fun setupUsersList() {
