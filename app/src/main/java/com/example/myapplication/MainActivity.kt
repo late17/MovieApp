@@ -4,6 +4,7 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +24,8 @@ class MainActivity : AppCompatActivity(), MainActivityView {
 
     private lateinit var mainLoadStateHolder: DefaultLoadStateAdapter.Holder
 
-    private val movieRepository = PageRepository()
 
-    private val viewModel by viewModelCreator { MainViewModel(movieRepository) }
+    private val viewModel by viewModels<MainViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

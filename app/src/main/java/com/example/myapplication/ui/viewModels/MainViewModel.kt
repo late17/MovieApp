@@ -14,10 +14,8 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 
 @OptIn(FlowPreview::class, kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-class MainViewModel(
-    private val pageRepository: PageRepository
-) : ViewModel() {
-
+class MainViewModel : ViewModel() {
+    private val pageRepository = PageRepository()
 
     val movieFlow: Flow<PagingData<Movie>>
 
