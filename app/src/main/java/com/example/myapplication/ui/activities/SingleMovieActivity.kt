@@ -68,7 +68,7 @@ class SingleMovieActivity : AppCompatActivity(), SingleMovieView {
         val moviePosterURL = POSTER_BASE_URL + movieDetails.posterPath
         Glide.with(this)
             .load(moviePosterURL)
-            .into(findViewById<ImageView>(R.id.iv_movie_poster));
+            .into(findViewById<ImageView>(R.id.iv_movie_poster))
     }
 
 

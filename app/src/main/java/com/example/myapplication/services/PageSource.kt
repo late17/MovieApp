@@ -18,17 +18,15 @@ class PageSource(private val movieAPI: MovieAPI) : PagingSource<Int, Movie>() {
 
         val page = params.key ?: 1
 
-        return try {
-            val users = movieAPI.getPopular(page)
-
+            val response = movieAPI.getPopular(page)
+            val movies = response.results
+            //val movie = Movie(listOf(3,4), "","","title1")
 
             return LoadResult.Page(
-                data = users,
-                prevKey = if (page == 0) null else page - 1,
-                nextKey = if (users.size == params.loadSize) page + (params.loadSize / 20) else null
+                data = movies,
+                prevKey = if (page >1) page-1 else null,
+                nextKey = if (movies.size == params.loadSize) page + (params.loadSize / 20) else null
             )
-        } catch (e: Exception) {
-            LoadResult.Error(throwable = e)
-        }
+
     }
 }

@@ -38,27 +38,12 @@ class MainActivity : AppCompatActivity(), MainActivityView {
     private fun setupUsersList() {
         val adapter = PageAdapter(this)
 
-        val footerAdapter = DefaultLoadStateAdapter(this)
-
-        // combined adapter which shows both the list of users + footer indicator when loading pages
-        val adapterWithLoadState = adapter.withLoadStateFooter(footerAdapter)
-
         recyclerView = findViewById(R.id.recylerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapterWithLoadState
-
-        val layoutInflater = LayoutInflater.from(this)
-        val itemView = layoutInflater.inflate(R.layout.load_state, recyclerView, false)
-        mainLoadStateHolder = DefaultLoadStateAdapter.Holder(
-            itemView
-        )
-
+        recyclerView.adapter = adapter
 
         observeUsers(adapter)
-        observeLoadState(adapter)
-
-//        handleListVisibility(adapter)
     }
 
     private fun observeUsers(adapter: PageAdapter) {
@@ -69,13 +54,4 @@ class MainActivity : AppCompatActivity(), MainActivityView {
         }
     }
 
-    private fun observeLoadState(adapter: PageAdapter) {
-        // you can also use adapter.addLoadStateListener
-        lifecycleScope.launch {
-            adapter.loadStateFlow.debounce(200).collectLatest { state ->
-                // main indicator in the center of the screen
-                mainLoadStateHolder.bind(state.refresh)
-            }
-        }
-    }
 }

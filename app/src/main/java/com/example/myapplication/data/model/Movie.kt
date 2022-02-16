@@ -1,8 +1,16 @@
 package com.example.myapplication.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Movie(
-    val genre_ids: List<Int>,
-    val poster_path: String,
-    val release_date: String,
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("genre_ids")
+    val genres: List<Int>,
+    @SerializedName("poster_path")
+    val posterPath: String,
+    @SerializedName("release_date")
+    val releaseDate: String,
+    @SerializedName("title")
     val title: String
 )

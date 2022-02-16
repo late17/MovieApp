@@ -4,12 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Movie
+import com.example.myapplication.data.remote.POSTER_BASE_URL
 
 class PageAdapter(context: Context) : PagingDataAdapter<Movie, PageAdapter.MovieViewHolder>(ArticleDiffItemCallback)  {
 
@@ -24,11 +28,23 @@ class PageAdapter(context: Context) : PagingDataAdapter<Movie, PageAdapter.Movie
     }
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        private var movieCard = itemView.findViewById<LinearLayout>(R.id.movieCard)
         private var title = itemView.findViewById<TextView>(R.id.main_movie_title)
+        private var poster = itemView.findViewById<ImageView>(R.id.main_movie_poster)
 
         fun bind(movie : Movie?){
             title.text = movie?.title
+            val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
+            Glide.with(itemView.context)
+                .load(moviePosterURL)
+                .into(poster)
+
+            movieCard.setOnClickListener {
+                
+            }
         }
+
+
     }
 }
 
@@ -39,6 +55,6 @@ private object ArticleDiffItemCallback : DiffUtil.ItemCallback<Movie>() {
     }
 
     override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-        return oldItem.title == newItem.title && oldItem.poster_path == newItem.poster_path
+        return oldItem.posterPath == newItem.posterPath
     }
 }

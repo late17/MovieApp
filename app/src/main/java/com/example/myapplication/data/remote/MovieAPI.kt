@@ -13,6 +13,6 @@ interface MovieAPI {
     fun getMovieDetailsById(@Path("movie_id") id: Int): Single<MovieDetails>
 
     @GET("movie/popular")
-    fun getPopular(@Query("page") pageNum: Int):List<Movie>
+    suspend fun getPopular(@Query("page") pageNum: Int):PageModel
 
 }
