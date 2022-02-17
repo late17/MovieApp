@@ -1,10 +1,9 @@
-package com.example.myapplication.data.viewModel
+package com.example.myapplication.ui.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.model.MovieDetails
 import com.example.myapplication.data.repositories.MovieRepository
-import com.example.myapplication.services.MovieService
 import com.example.myapplication.data.repositories.NetworkState
 import io.reactivex.disposables.CompositeDisposable
 

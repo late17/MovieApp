@@ -4,20 +4,18 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
 
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.model.MovieDetails
 import com.example.myapplication.data.remote.POSTER_BASE_URL
-import com.example.myapplication.data.viewModel.MovieDetailsViewModel
+import com.example.myapplication.ui.viewModels.MovieDetailsViewModel
 import com.example.myapplication.presenters.SingleMoviePresenter
 import com.example.myapplication.data.repositories.NetworkState.Companion.LOADED
-import com.example.myapplication.views.SingleMovieView
+import com.example.myapplication.ui.views.SingleMovieView
+import androidx.appcompat.widget.Toolbar
 import java.text.NumberFormat
 import java.util.*
 
@@ -28,12 +26,27 @@ class SingleMovieActivity : AppCompatActivity(), SingleMovieView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_movie)
-
         val movieId: Int = intent.getIntExtra("movieId",1)
-        presenter = SingleMoviePresenter(this)
-        presenter.onCreate(movieId)
+        presenter = SingleMoviePresenter(this, movieId)
 
+        settingUpBar()
+    }
 
+    private fun settingUpBar() {
+        // assigning ID of the toolbar to a variable
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        // using toolbar as ActionBar
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     override fun setData(movieDetails: MovieDetailsViewModel){
@@ -44,13 +57,15 @@ class SingleMovieActivity : AppCompatActivity(), SingleMovieView {
             pBar.visibility = if (it == LOADED) View.GONE else View.VISIBLE
         })
         movieDetails.movieDetails.observe(this, Observer {
-            bindData(it)
+            bind(it)
         })
     }
 
 
     @SuppressLint("SetTextI18n")
-    fun bindData(movieDetails: MovieDetails) {
+    fun bind(movieDetails: MovieDetails) {
+        supportActionBar?.title = movieDetails.title
+
         findViewById<TextView>(R.id.movie_title).text = movieDetails.title
         findViewById<TextView>(R.id.movie_tagline).text = movieDetails.tagline
         findViewById<TextView>(R.id.movie_release_date).text = movieDetails.releaseDate

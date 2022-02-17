@@ -1,29 +1,25 @@
-package com.example.myapplication
-
+package com.example.myapplication.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.activity.viewModels
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.data.adapters.DefaultLoadStateAdapter
+import com.example.myapplication.R
 import com.example.myapplication.data.adapters.PageAdapter
-import com.example.myapplication.data.repositories.PageRepository
+import com.example.myapplication.presenters.MainActivityPresenter
 import com.example.myapplication.ui.viewModels.MainViewModel
-import com.example.myapplication.views.MainActivityView
+import com.example.myapplication.ui.views.MainActivityView
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
-
 
 class MainActivity : AppCompatActivity(), MainActivityView {
 
+    private lateinit var mainActivityPresenter : MainActivityPresenter
+
     private lateinit var recyclerView : RecyclerView
-
-    private lateinit var mainLoadStateHolder: DefaultLoadStateAdapter.Holder
-
 
     private val viewModel by viewModels<MainViewModel>()
 
@@ -31,14 +27,25 @@ class MainActivity : AppCompatActivity(), MainActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mainActivityPresenter = MainActivityPresenter(this)
 
         setupUsersList()
+        settingUpBar()
+    }
+
+    private fun settingUpBar() {
+        // assigning ID of the toolbar to a variable
+        val toolbar = findViewById<Toolbar>(R.id.main_activity_toolbar)
+
+        // using toolbar as ActionBar
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "MovieApp"
     }
 
     private fun setupUsersList() {
         val adapter = PageAdapter(this)
 
-        recyclerView = findViewById(R.id.recylerView)
+        recyclerView = findViewById(R.id.recycler_view)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -53,5 +60,4 @@ class MainActivity : AppCompatActivity(), MainActivityView {
             }
         }
     }
-
 }

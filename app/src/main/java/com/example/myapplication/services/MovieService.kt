@@ -2,7 +2,7 @@ package com.example.myapplication.services
 
 import com.example.myapplication.data.remote.MovieAPIClient
 import com.example.myapplication.data.repositories.MovieRepository
-import com.example.myapplication.data.viewModel.MovieDetailsViewModel
+import com.example.myapplication.ui.viewModels.MovieDetailsViewModel
 
 
 class MovieService() {

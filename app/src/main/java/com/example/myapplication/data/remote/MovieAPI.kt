@@ -1,6 +1,5 @@
 package com.example.myapplication.data.remote
 
-import com.example.myapplication.data.model.Movie
 import com.example.myapplication.data.model.MovieDetails
 import com.example.myapplication.data.model.PageModel
 import io.reactivex.Single
